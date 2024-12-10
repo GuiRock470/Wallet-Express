@@ -1,0 +1,137 @@
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="src/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+        <title>Wallet Express</title>
+    </head>
+    <body class="login-body">
+        <div class="login-box">
+            <div class="login-box-header"></div>
+            <div class="login-box-body box-body">
+                <form action="">
+                    <div class="label-input-box">
+                        <label for="emailInput">E-mail</label>
+                        <input type="email" name="emailInput" id="login-email-input" placeholder="Digite seu e-mail">
+                    </div>
+                    <div class="label-input-box">
+                        <label for="senhaInput">Senha</label>
+                        <input type="password" name="senhaInput" id="login-password-input" placeholder="Digite sua senha">
+                    </div>
+                    <a id="forgotPassword-link" href="#forgotPass">Esqueceu sua senha?</a>
+                    <div class="separador"></div>
+
+                    <div class="space-between">
+                        <div class="checkbox-container flex">
+                            <img src="src/img/Box.svg" alt="checkbox" class="checkbox-img">
+                            <span class="checkbox-text">Manter Conectado</span>
+                        </div>
+
+                        <div class="button-box">
+                            <button class="gradientButton" id="loginButton" type="button">
+                                <span>Entrar</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="forgotPass-box-body box-body hide">
+                <form action="">
+                    <div class="label-input-box">
+                        <label for="forgot-emailInput">E-mail</label>
+                        <input type="email" name="forgot-emailInput" id="forgot-email-input" placeholder="Digite seu e-mail">
+                    </div>
+                    <div class="feedback align-start">
+                        <img src="src/img/green-check.svg" alt="checked green icon">
+                        <span>Um E-mail foi enviado para sua caixa de mensagens, por favor cheque o seu Inbox.</span>
+                    </div>
+                    <a id="backToLogin-link" href="#login">Voltar para a tela de Log in</a>
+                    <div class="separador"></div>
+
+                    <div class="space-between">
+                        <div class="flex">
+                            <span class="checkbox-text"></span>
+                        </div>
+
+                        <div class="button-box">
+                            <button class="gradientButton" id="forgotPassButton" type="button">
+                                <span>Redefinir senha</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="box-body hide redefPassword-box-body">
+                <form action="">
+                    <div class="label-input-box">
+                        <label for="newPassword-input">Nova Senha</label>
+                        <input type="password" name="newPassword-input" id="newPassword-input" placeholder="Digite sua nova senha">
+                    </div>
+                    <div class="label-input-box">
+                        <label for="repeatNewPassword-input">Confirmar Senha</label>
+                        <input type="password" name="repeatNewPassword-input" id="repeatNewPassword-input" placeholder="Confirme sua nova senha">
+                    </div>
+                    <span class="obs-text">
+                        *<p>Nova Senha</p> e <p>Confirmar senha</p> precisam ser iguais
+                    </span>
+                    <div class="separador"></div>
+
+                    <div class="space-between">
+                        <div class="button-box">
+                            <button class="voidButton" id="cancelRedefPassword">
+                                <span>Cancelar</span>
+                            </button>
+                        </div>
+
+                        <div class="button-box">
+                            <button class="gradientButton" id="confirmRedefPassword" type="button">
+                                <span>Redefinir senha</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-div show" id="login-fd">
+            <div class="block">
+                <div class="content-fd">
+                    <h3>Entrar</h3>
+                    <span>Bem vindo a <b>Wallet Express</b>, por favor digite suas credenciais para ter acesso a plataforma</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-div" id="forgotPass-fd">
+            <div class="block">
+                <div class="content-fd">
+                    <h3>Redefinir senha</h3>
+                    <span>Digite seu e-mail abaixo e nós te enviaremos um link para que você possa redefinir a sua senha</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-div" id="redefPassword-fd">
+            <div class="block">
+                <div class="content-fd">
+                    <h3>Alterar senha</h3>
+                    <span>Insira uma nova senha para a sua conta Wallet Express</span>
+                </div>
+            </div>
+        </div>
+
+        <script src="src/js/script.js" type="text/javascript"></script>
+    </body>
+</html>

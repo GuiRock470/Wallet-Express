@@ -1,0 +1,778 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
+    <script src="src/js/chart.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <title>Wallet Express</title>
+</head>
+
+<body class="home-body">
+    <div class="windowOverlay">
+    </div>
+    <div class="popup" id="confirmDelete-popup">
+        <label>Tem certeza que deseja <p>apagar</p> esse item?</label>
+        <div class="space-between">
+            <button class="cancel-btn" id="cancelDelete-btn">Não</button>
+            <button class="confirm-btn" id="confirmDelete-btn">Sim</button>
+        </div>
+    </div>
+
+    <div class="popup" id="operationSuccess-popup">
+        <label>Item apagado com sucesso!</label>
+            <button class="cancel-btn" id="close-btn">Fechar</button>
+    </div>
+
+    <div class="align-start">
+        <div class="side-menu">
+            <div class="logo-box">
+                <img src="src/img/Logo-small.svg" alt="">
+            </div>
+            <div class="userDiv flex">
+                <div class="userPicture-box">
+                    <img src="src/img/user.png" alt="foto de perfil">
+                </div>
+                <div class="block">
+                    <span class="userName">Bernardo Gomes</span>
+                    <span class="userRole">Patrocinador</span>
+                </div>
+            </div>
+    
+            <ul class="menu-opts">
+                <li class="menu-item selected" name="dashboard">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/speed.svg" alt="ícone velocímetro">
+                        <span class="menu-item-title">Dashboard</span>
+                    </div>
+                </li>
+                <!-- <li class="menu-item" name="wallet">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/wallet.svg" alt="ícone carteira">
+                        <span class="menu-item-title">Wallet</span>
+                    </div>
+                </li>
+                <li class="menu-item" name="players">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/videogame.svg" alt="ícone videogame">
+                        <span class="menu-item-title">Jogadores</span>
+                    </div>
+                </li>
+                <li class="menu-item" name="investors">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/coins.svg" alt="ícone moedas">
+                        <span class="menu-item-title">Investidores</span>
+                    </div>
+                </li>
+                <li class="menu-item" name="coaches">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/megaFone.svg" alt="ícone megafone">
+                        <span class="menu-item-title">Treinadores</span>
+                    </div>
+                </li>
+                <li class="menu-item" name="operations">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/chainList.svg" alt="ícone listas">
+                        <span class="menu-item-title">Operações</span>
+                    </div>
+                </li>
+                <li class="menu-item" name="reports">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/document.svg" alt="ícone relatório">
+                        <span class="menu-item-title">Relatórios</span>
+                    </div>
+                </li> -->
+                <li class="menu-item" name="userProfile">
+                    <div class="background"></div>
+                    <div class="flex">
+                        <img src="src/img/profile.svg" alt="ícone perfil">
+                        <span class="menu-item-title">Perfil do usuário</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="overflow">
+            <div class="content" id="dashboard" tab-key="dashboard">
+                <div class="inner-content">
+                    <div class="button-box">
+                        <div class="gradientLabel">
+                            <span>Patrocinador</span>
+                        </div>
+                    </div>
+    
+                    <h2 class="userName">BERNARDO GOMES BRAGA SIMÕES</h2>
+                    <div class="playerStartDate">
+                        <span>Data de Início em: <p>XX/XX/XXXX</p></span>
+                    </div>
+    
+                    <div class="info-box" id="playerHave-infoBox">
+                        <span class="info-title">Você Possui</span>
+                        <div class="block">
+                            <span class="info-val">XX COTAS</span>
+                            <span class="info-val-complement">no seu endereço Familiar</span>
+                        </div>
+                    </div>
+    
+                    <div class="space-between" id="dashboard-line1">
+                        <div class="info-box" id="yourQuotas-infoBox">
+                            <span class="info-title">Suas cotas</span>
+                            <div class="align-items">
+                                <span class="info-val">19</span>
+                            </div>
+                        </div>
+    
+                        <div class="info-box" id="numPlayers-infoBox">
+                            <span class="info-title">Número de Players na escola</span>
+                            <div class="space-between">
+                                <span class="info-val">288</span>
+                                <div class="info-status flex">
+                                    <img src="src/img/arrowGoingUp.svg" alt="">
+                                    <span class="info-status-text">+13%</span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="info-box" id="dollarizedContribution-infoBox">
+                            <span class="info-title">Seu Aporte Dolarizado é de</span>
+                            <div class="space-between">
+                                <span class="info-val">$ 6000,00</span>
+                                <div class="info-status flex">
+                                    <span class="info-status-text">Em 01/02/2022</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <div class="space-between" id="dashboard-line2">
+                        <div class="info-box" id="info-chart-box1">
+                            <span class="info-title">Gráfico de Investimento</span>
+                            <div class="block">
+                                <span class="info-val">2022</span>
+                            </div>
+                            <div class="chart-box">
+                                <canvas id="myChart" style="margin-left: -25px; padding-right: 25px; margin-top: -25px;"></canvas>
+                            </div>
+                            <div class="borderLine"></div>
+                        </div>
+    
+                        <div class="infoBox-column">
+                            <div class="info-box" id="alreadyRecived-infoBox">
+                                <span class="info-title">Você já recebeu o equivalente a</span>
+                                <div class="space-between">
+                                    <span class="info-val">$ 634,81</span>
+                                    <div class="info-status flex">
+                                        <img src="src/img/arrowGoingUp.svg" alt="">
+                                        <span class="info-status-text">+2%</span>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="info-box" id="sendo-infoBox">
+                                <span class="info-title">Sendo</span>
+                                <div class="space-between">
+                                    <span class="info-val">XXX SLP</span>
+                                </div>
+                            </div>
+    
+                            <div class="info-box" id="E-infoBox">
+                                <span class="info-title">E</span>
+                                <div class="space-between">
+                                    <span class="info-val">XXX AXS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="space-between" id="dashboard3">
+                        <div class="info-box" id="investPayed-infoBox">
+                            <span class="info-title">Restam p/ seu investimento ter sido pago</span>
+                            <div class="block">
+                                <span class="info-val">$5.365,19</span>
+    
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <div class="space-between">
+                                    <div class="progress-label">
+                                        <div class="lineDown"></div>
+                                        <div class="label-value">
+                                            <span>$ 634,81</span>
+                                        </div>
+                                    </div>
+    
+                                    <div class="total-progress-label">
+                                        <div class="lineDown"></div>
+                                        <div class="label-value">
+                                            <span>$ 6000,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box" id="dashboard4-infoBox">
+                        <div class="space-between">
+                            <div class="block">
+                                <span class="info-title">Você hoje recebe</span>
+                                <div class="block">
+                                    <span class="info-val">50%</span>
+                                    <span class="info-val-complement">do farm dos times da sua cota</span>
+                                </div>
+                            </div>
+                            <div class="infoChart" id="db4-infoChart"></div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box" id="dashboard5-infoBox">
+                        <div class="block">
+                            <span class="info-val-complement">Segue seu descritivo de Farming</span>
+                            <div class="flex">
+                                <div class="innerInfo">
+                                    <div class="background"></div>
+                                    <div class="innerInfo-content">
+                                        <span class="info-title">Farm total da escola no último mês</span>
+                                        <div class="space-between">
+                                            <span class="info-val">128124 SLP</span>
+                                            <div class="info-status flex">
+                                                <img src="src/img/arrowGoingUp.svg" alt="">
+                                                <span class="info-status-text">+5%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="innerInfo">
+                                    <div class="background"></div>
+                                    <div class="innerInfo-content">
+                                        <span class="info-title">Farm total da escola no último mês</span>
+                                        <div class="space-between">
+                                            <span class="info-val">XXX AXS</span>
+                                            <div class="info-status flex">
+                                                <img src="src/img/arrowGoingUp.svg" alt="">
+                                                <span class="info-status-text">+5%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box" id="info-chart-box2">
+                        <div class="chartTitle">
+                            <span>Gráfico da performance da escola</span>
+                        </div>
+                        <div class="chart-box" id="myChart2-box">
+                            <canvas id="myChart2" style="margin-left: -30px; padding-right: 30px;"></canvas>
+                        </div>
+                        <div class="borderLine"></div>
+                        <div class="lagend-box space-between">
+                            <div class="legend legend1 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">SLP</span>
+                            </div>
+
+                            <div class="legend legend2 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">AXS</span>
+                            </div>
+                        </div>
+                    </div>
+
+    
+                    <div class="info-box" id="dashboard6-infoBox">
+                        <div class="block">
+                            <span class="info-val-complement">Seu Último recebimento</span>
+                            <div class="flex">
+                                <div class="innerInfo">
+                                    <div class="background"></div>
+                                    <div class="innerInfo-content">
+                                        <span class="info-title">Último recebimento em SLP</span>
+                                        <div class="space-between">
+                                            <span class="info-val">4218 SLP</span>
+                                            <div class="info-status flex">
+                                                <img src="src/img/arrowGoingUp.svg" alt="">
+                                                <span class="info-status-text">+5%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="innerInfo">
+                                    <div class="background"></div>
+                                    <div class="innerInfo-content">
+                                        <span class="info-title">Último recebimento em AXS</span>
+                                        <div class="space-between">
+                                            <span class="info-val">XXX AXS</span>
+                                            <div class="info-status flex">
+                                                <img src="src/img/arrowGoingDown.svg" alt="">
+                                                <span class="info-status-text">-15%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box" id="info-chart-box3">
+                        <div class="chartTitle">
+                            <span>Gráfico da performance do investimento</span>
+                        </div>
+                        <div class="chart-box" id="myChart3-box">
+                            <canvas id="myChart3" style="margin-left: -30px; padding-right: 30px;"></canvas>
+                        </div>
+                        <div class="borderLine"></div>
+                        <div class="lagend-box space-between">
+                            <div class="legend legend1 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">SLP</span>
+                            </div>
+
+                            <div class="legend legend2 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">AXS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box" id="info-chart-box21">
+                        <div class="chartTitle">
+                            <span>Gráfico da performance do Jogador</span>
+                        </div>
+                        <div class="chart-box" id="myChart4-box">
+                            <canvas id="myChart21" style="margin-left: -30px; padding-right: 30px;"></canvas>
+                        </div>
+                        <div class="borderLine"></div>
+                        <div class="lagend-box space-between">
+                            <div class="legend legend1 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">SLP</span>
+                            </div>
+
+                            <div class="legend legend2 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">AXS</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box" id="dashboard7-infoBox">
+                        <div class="block">
+                            <span class="info-val-complement">Valor em Dólar do seu último recebimento</span>
+                            <div class="innerInfo">
+                                <div class="background"></div>
+                                <div class="innerInfo-content">
+                                    <span class="info-title">Último recebimento em dólar</span>
+                                    <div class="space-between">
+                                        <span class="info-val">XXX USD</span>
+                                        <div class="info-status flex">
+                                            <img src="src/img/arrowGoingUp.svg" alt="">
+                                            <span class="info-status-text">+21%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="space-between" id="dashboard-line8">
+                        <div class="info-box" id="yourlastPayment-infoBox">
+                            <span class="info-title">Seu Último Pagamento</span>
+                            <div class="space-between">
+                                <span class="info-val">9999 SLP</span>
+                                <div class="info-status flex">
+                                    <img src="src/img/arrowGoingUp.svg" alt="">
+                                    <span class="info-status-text">+3%</span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="info-box" id="currentRecievedPercent-infoBox">
+                            <span class="info-title">Seu Percentual Recebido Atualmente</span>
+                            <div class="block">
+                                <span class="info-val">40%</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box info-chart-box" id="info-chart-box4">
+                        <div class="chartTitle">
+                            <span>Oscilação do Dólar</span>
+                        </div>
+                        <div class="chart-box myChart-box">
+                            <canvas id="myChart4" style="margin-left: -35px; padding-right: 20px; margin-bottom: 0px;"></canvas>
+                        </div>
+                        <div class="lagend-box">
+                            <div class="legend legend1 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">USD</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box info-chart-box" id="info-chart-box5">
+                        <div class="chartTitle">
+                            <span>Oscilação do SLP</span>
+                        </div>
+                        <div class="chart-box myChart-box">
+                            <canvas id="myChart5" style="margin-left: -35px; padding-right: 20px; margin-bottom: 0px;"></canvas>
+                        </div>
+                        <div class="lagend-box">
+                            <div class="legend legend1 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">SLP</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box info-chart-box" id="info-chart-box6">
+                        <div class="chartTitle">
+                            <span>Oscilação do AXS</span>
+                        </div>
+                        <div class="chart-box myChart-box">
+                            <canvas id="myChart6" style="margin-left: -35px; padding-right: 20px; margin-bottom: 0px;"></canvas>
+                        </div>
+                        <div class="lagend-box">
+                            <div class="legend legend1 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">USD</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box" id="dailyFarm-infoBox">
+                        <span class="info-title">Media farm diário do último mês</span>
+                        <div class="space-between">
+                            <span class="info-val">14,35 SLP</span>
+                            <div class="info-status flex">
+                                <img src="src/img/arrowGoingUp.svg" alt="">
+                                <span class="info-status-text">+21%</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box info-chart-box" id="info-chart-box7">
+                        <div class="chartTitle">
+                            <span>Performance de farm médio mensal</span>
+                        </div>
+                        <div class="chart-box myChart-box">
+                            <canvas id="myChart7" style="margin-left: -35px; padding-right: 20px; margin-bottom: 0px;"></canvas>
+                        </div>
+                        <div class="lagend-box">
+                            <div class="legend legend1 flex">
+                                <div class="legend-color"></div>
+                                <span class="legend-text">SLP GANHO MENSALMENTE</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-box" id="hashIds-infoBox">
+                        <span class="info-val-complement">HashIDs das transferências já realizadas</span>
+                        <div class="innerInfo">
+                            <div class="background"></div>
+                            <div class="innerInfo-content">
+    
+                                <div class="data-box">
+                                    <div class="entryDate-box">
+                                        <span>10/04/2022</span>
+                                    </div>
+                                    <div class="entryHeadline">
+                                        <span>(Cotação em 10/04/2022 para 1 SLP = 0.01945 dólares)</span>
+                                    </div>
+                                    <div class="separador"></div>
+                                    <div class="entryHashId">
+                                        <p>208 SLP em 0x536d9e76252f7f1b571fed9f5ce8126c6a13e0842dfe69412f6aa75061ad0d65 69
+                                            SLP em 0x13c674cf902223577e0673dc310926a31d8db015064b85728cc69d8576a9b955 365
+                                            SLP em 0xa97ff8946c20bd919c8ce42e975f28f8f736b66b0c2cd41fc907535f1595ff83 34 SLP
+                                            em 0xcc9d0e3524a5defa1f04f42bf852e146b8b7d2f95ab34fe292d39d9600d0c2c6 1116 SLP
+                                            em 0x8f3b3f05e9fd99dd115b9aa8c13ba11696cdc7b11d20499001b5fa6ed2ca0b07 139 SLP em
+                                            0x701c04721c17e5b6113e9c9d739ede344194c454ce4e660ed914fd5cd4e8741f</p>
+                                    </div>
+                                </div>
+                                <div class="data-box">
+                                    <div class="entryDate-box">
+                                        <span>10/03/2022</span>
+                                    </div>
+                                    <div class="entryHeadline">
+                                        <span>(Cotação em 10/03/2022 para 1 SLP = 0.02545 dólares)</span>
+                                    </div>
+                                    <div class="separador"></div>
+                                    <div class="entryHashId">
+                                        <p>208 SLP em 0x536d9e76252f7f1b571fed9f5ce8126c6a13e0842dfe69412f6aa75061ad0d65 69
+                                            SLP em 0x13c674cf902223577e0673dc310926a31d8db015064b85728cc69d8576a9b955 365
+                                            SLP em 0xa97ff8946c20bd919c8ce42e975f28f8f736b66b0c2cd41fc907535f1595ff83 34 SLP
+                                            em 0xcc9d0e3524a5defa1f04f42bf852e146b8b7d2f95ab34fe292d39d9600d0c2c6 1116 SLP
+                                            em 0x8f3b3f05e9fd99dd115b9aa8c13ba11696cdc7b11d20499001b5fa6ed2ca0b07 139 SLP em
+                                            0x701c04721c17e5b6113e9c9d739ede344194c454ce4e660ed914fd5cd4e8741f</p>
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <div class="content" tab-key="userProfile">
+                <div class="content-header">
+                    <span>Perfil do Usuário</span>
+                </div>
+                <div class="inner-content">
+                    <div class="tableBox">
+                        <table>
+                            <thead>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Senha</th>
+                                <th>N° de Telefone</th>
+                                <th>
+                                    <div class="button-box">
+                                        <button class="gradientButton" id="registerUser" type="button">
+                                            <span>Cadastrar</span>
+                                        </button>
+                                    </div>
+                                </th>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr itemid="0">
+                                    <td class="nameTableCell">
+                                        <span>Bernardo</span>
+                                    </td>
+                                    <td class="emailTableCell">
+                                        <span>exemplo@mail.com</span>
+                                    </td>
+                                    <td class="passwordTableCell">
+                                        <span>**********</span>
+                                    </td>
+                                    <td class="phoneTableCell">
+                                        <span>+55 97 99235-3274</span>
+                                    </td>
+                                     <td class="buttonsTableCell">
+                                        <div class="edit">
+                                            <img src="src/img/edit.svg" alt="">
+                                        </div>
+                                        <div class="delete">
+                                            <img src="src/img/delete.svg" alt="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr itemid="1">
+                                    <td class="nameTableCell">
+                                        <span>Leonardo</span>
+                                    </td>
+                                    <td class="emailTableCell">
+                                        <span>exemplo@mail.com</span>
+                                    </td>
+                                    <td class="passwordTableCell">
+                                        <span>**********</span>
+                                    </td>
+                                    <td class="phoneTableCell">
+                                        <span>+55 83 99477-2486</span>
+                                    </td>
+                                    <td class="buttonsTableCell">
+                                        <div class="edit">
+                                            <img src="src/img/edit.svg" alt="">
+                                        </div>
+                                        <div class="delete">
+                                            <img src="src/img/delete.svg" alt="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr itemid="2">
+                                    <td class="nameTableCell">
+                                        <span>Gustavo</span>
+                                    </td>
+                                    <td class="emailTableCell">
+                                        <span>exemplo@mail.com</span>
+                                    </td>
+                                    <td class="passwordTableCell">
+                                        <span>**********</span>
+                                    </td>
+                                    <td class="phoneTableCell">
+                                        <span>+55 68 99813-9885</span>
+                                    </td>
+                                     <td class="buttonsTableCell">
+                                        <div class="edit">
+                                            <img src="src/img/edit.svg" alt="">
+                                        </div>
+                                        <div class="delete">
+                                            <img src="src/img/delete.svg" alt="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr itemid="3">
+                                    <td class="nameTableCell">
+                                        <span>Pedro</span>
+                                    </td>
+                                    <td class="emailTableCell">
+                                        <span>exemplo@mail.com</span>
+                                    </td>
+                                    <td class="passwordTableCell">
+                                        <span>**********</span>
+                                    </td>
+                                    <td class="phoneTableCell">
+                                        <span>+55 51 98197-7544</span>
+                                    </td>
+                                     <td class="buttonsTableCell">
+                                        <div class="edit">
+                                            <img src="src/img/edit.svg" alt="">
+                                        </div>
+                                        <div class="delete">
+                                            <img src="src/img/delete.svg" alt="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr itemid="4">
+                                    <td class="nameTableCell">
+                                        <span>Alex</span>
+                                    </td>
+                                    <td class="emailTableCell">
+                                        <span>exemplo@mail.com</span>
+                                    </td>
+                                    <td class="passwordTableCell">
+                                        <span>**********</span>
+                                    </td>
+                                    <td class="phoneTableCell">
+                                        <span>+55 21 98308-7048</span>
+                                    </td>
+                                     <td class="buttonsTableCell">
+                                        <div class="edit">
+                                            <img src="src/img/edit.svg" alt="">
+                                        </div>
+                                        <div class="delete">
+                                            <img src="src/img/delete.svg" alt="">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    <div class="registerUser-box">
+                        <div class="innerContent-nav">
+                            <div class="button-box img-btn">
+                                <button class="gradientButton backTo-btn" id="userProfile-back" type="button">
+                                    <span>Voltar/Cancelar</span>
+                                </button>
+                                <img src="src/img/arrowBack.svg" alt="">
+                            </div>
+                            <span>Cadastrar perfil do usuário</span>
+                        </div>
+    
+                        <div class="registerForm-box">
+                            <form>
+                                <div class="align-start">
+                                    <div class="inputGroup">
+                                        <div class="label-input-box">
+                                            <label for="registerUserName-Input">Nome</label>
+                                            <input type="text" name="registerUserName-Input" id="register-userName-input" placeholder="Nome do usuário">
+                                        </div>
+    
+                                        <div class="label-input-box">
+                                            <label for="registerUserEmail-Input">E-mail</label>
+                                            <input type="email" name="registerUserEmail-Input" id="register-userEmail-input" placeholder="Digite seu e-mail atual">
+                                        </div>
+    
+                                        <div class="label-input-box">
+                                            <label for="registerUserAddress-Input">Endereço</label>
+                                            <input type="text" name="registerUserAddress-Input" id="register-userAddress-input" placeholder="Digite seu endereço">
+                                        </div>
+    
+                                        <div class="label-input-box">
+                                            <label for="registerUserPhone-Input">Telefone</label>
+                                            <input type="tel" name="registerUserPhone-Input" id="register-userPhone-input" placeholder="+55 00 00000-0000">
+                                        </div>
+    
+                                        <div class="label-input-box">
+                                            <label for="registerUserBinance-Input">Carteira Binance (ronin)</label>
+                                            <input type="tel" name="registerUserBinance-Input" id="register-userBinance-input" placeholder="ronin: xxxxxxxxxxxxxxxxx">
+                                        </div>
+                                    </div>
+    
+                                    <div class="inputGroup">
+                                        <div class="label-input-box input-icon-left">
+                                            <label for="registerUserFile-Input">Carregar foto</label>
+                                            <input disabled type="text" name="registerUserFile-Input" id="register-userFile-input" placeholder="Selecione um arquivo de imagem">
+                                            <img src="src/img/anexo.svg" alt="">
+                                            <input type="file" name="inputFile-foto" class="inputFile" id="uploadPictures-Inputfile" accept="image/*">
+                                        </div>
+    
+                                        <div class="label-input-box input-icon-right">
+                                            <label for="registerUserPassw-Input">Senha</label>
+                                            <input type="password" name="registerUserPassw-Input" id="register-userPassw-input" class="password-input" placeholder="Digite sua senha atual">
+                                            <img class="showPass" src="src/img/hidePassword.svg" alt="">
+                                        </div>
+    
+                                        <div class="label-input-box">
+                                            <label for="registerUserCPF-Input">CPF</label>
+                                            <input type="text" name="registerUserCPF-Input" id="register-userCPF-input" placeholder="000.000.000-00">
+                                        </div>
+    
+                                        <div class="label-input-box">
+                                            <label for="registerUserDiscord-Input">Nome do usuário Discord</label>
+                                            <input type="text" name="registerUserDiscord-Input" id="register-userDiscord-input" placeholder="Exemplo#0000">
+                                        </div>
+    
+                                        <div class="submitButton-box">
+                                            <div class="button-box">
+                                                <button class="gradientButton" id="ConfirmRegisterUser" type="button">
+                                                    <span>Cadastrar usuário</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                
+                            </form>
+                        </div>
+                    </div>
+    
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+    <script src="src/js/charts/investmentChart.js" type="text/javascript"></script>
+    <script src="src/js/charts/schoolPerformanceChart.js" type="text/javascript"></script>
+    <script src="src/js/charts/investmentPerformanceChart.js" type="text/javascript"></script>
+    <script src="src/js/charts/dollarChart.js" type="text/javascript"></script>
+    <script src="src/js/charts/slpChart.js" type="text/javascript"></script>
+    <script src="src/js/charts/slpMonthlyChart.js" type="text/javascript"></script>
+    <script src="src/js/charts/axsChart.js" type="text/javascript"></script>
+    <script src="src/js/charts/playerPerformanceChart.js" type="text/javascript"></script>
+
+    <script src="src/js/script.js" type="text/javascript"></script>
+</body>
+
+</html>
+
